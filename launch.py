@@ -93,7 +93,7 @@ if clients != 0:
         subprocess.Popen(hc_launch, shell=True)
 
 else:
-    launch += ' -config="/arma3/configs/{}"'.format(CONFIG_FILE)
+    launch += ' -config="/arma3/configs/{}" -cfg="/arma3/configs/{}"'.format(CONFIG_FILE, BASIC_CONFIG_FILE)
 
 launch += ' -port={} -name="{}" -profiles="/arma3/configs/profiles"'.format(
     os.environ["PORT"], os.environ["ARMA_PROFILE"]
