@@ -24,7 +24,7 @@ I use this in Kubernetes with Traefik, however I've included the Docker CLI and 
         -e STEAM_USER=myusername \
         -e STEAM_PASSWORD=mypassword \
         -e ARMA_BASIC=basic.cfg \
-        synixebrett/arma3server
+        lachlancstevens/arma3-server
 ```
 
 ### docker-compose
