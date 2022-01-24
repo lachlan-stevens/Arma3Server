@@ -1,8 +1,8 @@
 # Arma 3 Dedicated Server
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/synixebrett/arma3server.svg?style=flat-square)](https://hub.docker.com/r/synixebrett/arma3server)
+This is a docker image for hosting an Arma 3 dedicated server. It is forked from [BrettMayson's image](https://github.com/brettmayson/arma3server), with some changes made by me to fix a couple of issues I was having with it, as well as making modification of the basic.cfg settings a little bit easier.
 
-An Arma 3 Dedicated Server. Updates to the latest version every time it is restarted.
+I use this in Kubernetes with Traefik, however I've included the Docker CLI and docker-compose settings based on BrettMayson's original documentation.
 
 ## Usage
 
@@ -23,6 +23,7 @@ An Arma 3 Dedicated Server. Updates to the latest version every time it is resta
         -e ARMA_CONFIG=main.cfg \
         -e STEAM_USER=myusername \
         -e STEAM_PASSWORD=mypassword \
+        -e ARMA_BASIC=basic.cfg \
         synixebrett/arma3server
 ```
 
@@ -69,6 +70,7 @@ Profiles are saved in `/arma3/configs/profiles`
 | `-e HEADLESS_CLIENTS`         | Launch n number of headless clients                       | `0` |
 | `-e MODS_LOCAL`               | Should the mods folder be loaded | `true` |
 | `-e MODS_PRESET`              | An Arma 3 Launcher preset to load |
+| `-e BASIC_CONFIG`             | Basic config file to load from `arma3/configs`            |`basic.cfg` |
 
 The Steam account does not need to own Arma 3, but must have Steam Guard disabled.
 
