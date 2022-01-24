@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 
-LABEL maintainer="Brett - github.com/brettmayson"
-LABEL org.opencontainers.image.source=https://github.com/brettmayson/arma3server
+LABEL maintainer="Lachlan Stevens"
+LABEL org.opencontainers.image.source=https://github.com/lachlan-stevens
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
