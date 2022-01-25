@@ -23,7 +23,7 @@ RUN apt-get update \
     && \
     rm -rf /var/lib/apt/lists/* \
     && \
-    systemctl restart dnsmasq
+    systemctl restart dnsmasq \
     && \
     mkdir -p /steamcmd \
     && \
