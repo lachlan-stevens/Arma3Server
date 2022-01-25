@@ -15,6 +15,8 @@ RUN apt-get update \
         dnsmasq \
         resolvconf \
     && \
+    apt-get remove -y dnsmasq-base \
+    && \
     apt-get remove --purge -y \
     && \
     apt-get clean autoclean \
