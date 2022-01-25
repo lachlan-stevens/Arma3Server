@@ -25,8 +25,6 @@ RUN apt-get update \
     && \
     rm -rf /var/lib/apt/lists/* \
     && \
-    systemctl restart dnsmasq \
-    && \
     mkdir -p /steamcmd \
     && \
     wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf - -C /steamcmd
