@@ -166,7 +166,7 @@ elif OP_MODE.lower() == "headless":
         
     host_ip = ""
     try: 
-        host_ip = ipaddress.ip_network(os.environ(HOST_IP).hosts()
+        host_ip = ipaddress.ip_network(os.environ(HOST_IP).hosts())
     except:
         print("[ERROR]: Valid IPv4 Host IP is required for headless mode. Exiting.")
     else:
