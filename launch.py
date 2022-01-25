@@ -119,7 +119,7 @@ if OP_MODE.lower() == "basic":
 elif OP_MODE.lower() == "standalone":
     
     if (clients > 0):
-        print("[WARNING]: HEADLESS_CLIENTS set to {}. Expected for standalone mode: 0. Ignoring.".format{clients})
+        print("[WARNING]: HEADLESS_CLIENTS set to {}. Expected for standalone mode: 0. Ignoring.".format(clients))
 
     if HEADLESS_IP != "":
         headless_list = []
