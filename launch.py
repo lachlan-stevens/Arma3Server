@@ -18,7 +18,8 @@ def env_defined(key):
 CONFIG_FILE = os.environ["ARMA_CONFIG"]
 OP_MODE = os.environ["OP_MODE"]
 KEYS = "/arma3/keys"
-HEADLESS_IP = os.environ["HOST_IP"]
+HEADLESS_IP = os.environ["HEADLESS_IP"]
+HOST_IP = os.environ["HOST_IP"]
 
 if not os.path.isdir(KEYS):
     if os.path.exists(KEYS):
@@ -165,7 +166,7 @@ elif OP_MODE.lower() == "headless":
         
     host_ip = ""
     try: 
-        host_ip = str(IPv4Network(os.environ(HOST_IP).hosts()))
+        host_ip = ipaddress.ip_network(os.environ(HOST_IP).hosts()
     except:
         print("[ERROR]: Valid IPv4 Host IP is required for headless mode. Exiting.")
     else:
