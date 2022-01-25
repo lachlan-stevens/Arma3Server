@@ -13,7 +13,7 @@ RUN apt-get update \
         wget \
         ca-certificates \
         dnsmasq \
-        resolvconf
+        resolvconf \
     && \
     apt-get remove --purge -y \
     && \
