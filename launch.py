@@ -60,11 +60,11 @@ if os.environ["ARMA_CDLC"] != "":
     for cdlc in os.environ["ARMA_CDLC"].split(";"):
         launch += " -mod={}".format(cdlc)
 
-print("Starting container in {} mode".format(OP_MODE)
+print("Starting container in {} mode".format(OP_MODE))
 
 clients = int(os.environ["HEADLESS_CLIENTS"])
 
-if OP_MODE.lower() = "basic":   
+if OP_MODE.lower() == "basic":   
 
     clients = int(os.environ["HEADLESS_CLIENTS"])
     print("Headless Clients:", clients)
@@ -114,20 +114,20 @@ if OP_MODE.lower() = "basic":
 
 
     print("LAUNCHING ARMA SERVER WITH", launch, flush=True)
-        os.system(launch)
+    os.system(launch)
 
-else if OP_MODE.lower() = "standalone":
+elif OP_MODE.lower() == "standalone":
     
     if (clients > 0):
         print("[WARNING]: HEADLESS_CLIENTS set to {}. Expected for standalone mode: 0. Ignoring.".format{clients})
 
     if HEADLESS_IP != "":
         headless_list = []
-        for ip in HEADLESS_IP.split(";")
+        for ip in HEADLESS_IP.split(";"):
             headless_list+= ipaddress.ip_network(ip).hosts()
 
         with open("/arma3/configs/{}".format(CONFIG_FILE)) as config:
-        data = config.read()
+            data = config.read()
         regex = r"(.+?)(?:\s+)?=(?:\s+)?(.+?)(?:$|\/|;)"
 
         config_values = {}
@@ -161,12 +161,12 @@ else if OP_MODE.lower() = "standalone":
     print("LAUNCHING ARMA SERVER WITH", launch, flush=True)
     os.system(launch)
 
-else if OP_MODE.lower() = "headless":
+elif OP_MODE.lower() == "headless":
         
     host_ip = ""
     try: 
         host_ip =IPv4Network(os.environ(HOST_IP))
-    catch:
+    except:
         print("[ERROR]: Valid IPv4 Host IP is required for headless mode. Exiting.")
     else:
         with open("/arma3/configs/{}".format(CONFIG_FILE)) as config:
@@ -198,6 +198,3 @@ else if OP_MODE.lower() = "headless":
             )
         print("LAUNCHING ARMA CLIENT {} WITH".format(i), launch)
         os.system(launch)
-
-            
-        
