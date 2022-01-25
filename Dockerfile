@@ -12,8 +12,6 @@ RUN apt-get update \
         lib32gcc1 \
         wget \
         ca-certificates \
-        dnsmasq \
-        resolvconf
     && \
     apt-get remove --purge -y \
     && \
@@ -22,8 +20,6 @@ RUN apt-get update \
     apt-get autoremove -y \
     && \
     rm -rf /var/lib/apt/lists/* \
-    && \
-    systemctl restart dnsmasq \
     && \
     mkdir -p /steamcmd \
     && \
