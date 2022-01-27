@@ -75,7 +75,7 @@ if os.environ["ARMA_CDLC"] != "":
 
 clients = int(os.environ["HEADLESS_CLIENTS"])
 
-if (OP_MODE.lower() == "basic"):   
+if (OP_MODE.lower() == "legacy"):   
 
     print("Configuring legacy server...") 
     print("Headless Clients:", clients)
