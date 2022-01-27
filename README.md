@@ -4,6 +4,8 @@ This is a docker image for hosting an Arma 3 dedicated server. It is forked from
 
 I use this in Kubernetes with Traefik, however I've included the Docker CLI and docker-compose settings based on BrettMayson's original documentation.
 
+This is the 1.1.0 (pre-release branch). I have been testing in Kubernetes, however haven't tested with pure Docker or docker-compose and can not guarantee the stability of it yet. In particular, I have not updated the Docker CLI or docker-compose documentation yet (though it should work in legacy mode with the existing documentation - that defeats the point of using this version though).
+
 ## Usage
 
 ### Docker CLI
@@ -24,7 +26,7 @@ I use this in Kubernetes with Traefik, however I've included the Docker CLI and 
         -e STEAM_USER=myusername \
         -e STEAM_PASSWORD=mypassword \
         -e ARMA_BASIC=basic.cfg \
-        lachlancstevens/arma3-server
+        lachlancstevens/arma3-server:latest
 ```
 
 ### docker-compose
