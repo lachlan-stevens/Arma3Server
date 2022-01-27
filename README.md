@@ -67,10 +67,13 @@ Profiles are saved in `/arma3/configs/profiles`
 | `-e STEAM_BRANCH_PASSWORD`    | Steam branch password used by steamcmd |
 | `-e STEAM_USER`               | Steam username used to login to steamcmd |
 | `-e STEAM_PASSWORD`           | Steam password |
-| `-e HEADLESS_CLIENTS`         | Launch n number of headless clients                       | `0` |
+| `-e HEADLESS_CLIENTS`         | Launch n number of headless clients (legacy mode only)                      | `0` |
 | `-e MODS_LOCAL`               | Should the mods folder be loaded | `true` |
 | `-e MODS_PRESET`              | An Arma 3 Launcher preset to load |
 | `-e BASIC_CONFIG`             | Basic config file to load from `arma3/configs`            |`basic.cfg` |
+| `-e OP_MODE`                  | Whether the container will operate in legacy mode (server and headless clients in the same container), standalone (server only with option to provide headless client IPs, or client (headless client only with server host IP supplied)           |`legacy` |
+| `-e HEADLESS_IP`                  | semi-colon delimited lists of either single IPs e.g. `192.168.0.1` or CIDR IP blocks e.g. `192.168.0.0/24`         |
+| `-e HOST_IP`                  | The IP address for a headless client to connect to. |
 
 The Steam account does not need to own Arma 3, but must have Steam Guard disabled.
 
@@ -105,7 +108,7 @@ To use a Creator DLC the `STEAM_BRANCH` must be set to `creatordlc`
 
 ### Workshop
 
-Set the environment variable `MODS_PRESET` to the HTML preset file exported from the Arma 3 Launcher. The path can be local file or a URL. A volume can be created at `/arma3/steamapps/workshop/content/107410` to preserve the mods between containers.
+Set the environment variable `MODS_PRESET` to the HTML preset file exported from the Arma 3 Launcher. The path can be local file or a URL. A volume can be created at `/arma3/steamapps/workshop/content/107410` to preserve the mods between containers. To use the `MODS_PRESENT` environmental variable, the steam account used for the server must own Arma 3. If it doesn't, attempts to download the mods from the Steam Workshop will fail.
 
 `-e MODS_PRESET="my_mods.html"`
 
