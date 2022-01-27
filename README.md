@@ -1,5 +1,7 @@
 # Arma 3 Dedicated Server
 
+![Docker Pulls](https://img.shields.io/docker/pulls/lachlancstevens/arma3-server?style=for-the-badge)
+
 This is a docker image for hosting an Arma 3 dedicated server. It is forked from [BrettMayson's image](https://github.com/brettmayson/arma3server), with some changes made by me to fix a couple of issues I was having with it, as well as making modification of the basic.cfg settings a little bit easier.
 
 I use this in Kubernetes with Traefik, however I've included the Docker CLI and docker-compose settings based on BrettMayson's original documentation.
