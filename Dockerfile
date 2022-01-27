@@ -9,12 +9,9 @@ RUN apt-get update \
     apt-get install -y --no-install-recommends --no-install-suggests \
         python3 \
         lib32stdc++6 \
-        lib32gcc1 \
+        lib32gcc-s1 \
         wget \
         ca-certificates \
-        dnsmasq \
-    && \
-    apt-get remove -y dnsmasq-base \
     && \
     apt-get remove --purge -y \
     && \
