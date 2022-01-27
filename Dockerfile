@@ -13,7 +13,6 @@ RUN apt-get update \
         wget \
         ca-certificates \
         dnsmasq \
-        resolvconf \
     && \
     apt-get remove -y dnsmasq-base \
     && \
@@ -46,6 +45,8 @@ ENV BASIC_CONFIG=basic.cfg
 ENV OP_MODE=basic
 ENV HEADLESS_IP=
 ENV HOST_IP=
+ENV HOST_SERVICE=
+ENV HOST_PORT=
 
 EXPOSE 2302/udp
 EXPOSE 2303/udp
@@ -61,4 +62,4 @@ STOPSIGNAL SIGINT
 
 COPY *.py /
 
-CMD ["python3","/launch.py"]
+CMD ["python3","-u","/launch.py"]
