@@ -22,12 +22,17 @@ OP_MODE = os.environ["OP_MODE"]
 KEYS = "/arma3/keys"
 HEADLESS_IP = os.environ["HEADLESS_IP"]
 HOST_IP = os.environ["HOST_IP"]
+CACHE = os.environ["CACHE"]
 try:
     HOST_IP = os.environ[HOST_IP]
     print("Got service IP from env")
 except:
     print("Attempted to get service environment variable for IP HOST IP. Failed.")
 
+if (CACHE != 0):
+    print("Attempting to get files from cache")
+    if (os.path.exists("/cache")):
+        subprocess.call("rsync -a", "/cache .")
 
 print("Starting container in {} mode...".format(OP_MODE))
 
@@ -51,6 +56,14 @@ if env_defined("STEAM_BRANCH_PASSWORD"):
 steamcmd.extend(["validate", "+quit"])
 subprocess.call(steamcmd)
 
+# CACHE
+
+if (CACHE != 0):
+    print("Attempting to sync files back to cache.")
+    if (os.path.exists("/cache")):
+        subprocess.call("rsync -a","--exclude 'keys/'", "--exclude 'mods/'", "--exclude 'missions/'", "--exclude 'servermods/'", "--exclude '__pycache/'" "--exclude 'mpmissions/'", "--exclude 'configs/basic.cfg' --exclude 'configs/main.cfg'", ". /cache" )
+    else:
+        print("Cache directory not found. Skipping.")
 # Mods
 
 mods = []
