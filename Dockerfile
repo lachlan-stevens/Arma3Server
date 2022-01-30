@@ -12,6 +12,7 @@ RUN apt-get update \
         lib32gcc-s1 \
         wget \
         ca-certificates \
+        rsync \
     && \
     apt-get remove --purge -y \
     && \

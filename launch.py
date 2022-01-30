@@ -32,14 +32,14 @@ except:
 
     print("Starting container in {} mode...".format(OP_MODE))
 
-if (OP_MODE.lower() = "client" and CACHE != 0):
+if (OP_MODE.lower() == "client" and CACHE != 0):
     while(True):
         print("Waiting for host to be ready...")
-        sleep(30)
+        time.sleep(30)
         if (os.path.exists("config/ready")):
             break
 
-elif (OP_MODE.lower() = "standalone"):
+elif (OP_MODE.lower() == "standalone"):
     if (os.path.exists("config/ready")):
         os.remove("config/ready")
 
@@ -47,7 +47,7 @@ elif (OP_MODE.lower() = "standalone"):
 if (CACHE != 0):
     print("Attempting to get files from cache")
     if (os.path.exists("/cache")):
-        subprocess.call("rsync -a", "/cache .")
+        subprocess.call("rsync -a -P --exclude 'keys' --exclude 'mods' --exclude 'missions' --exclude 'servermods' --exclude '__pycache__' --exclude 'mpmissions' --exclude 'configs/basic.cfg' --exclude 'configs/main.cfg' /cache/ /arma3/".split())
 
 
 if not os.path.isdir(KEYS):
@@ -63,6 +63,8 @@ steamcmd = ["/steamcmd/steamcmd.sh"]
 steamcmd.extend(["+force_install_dir", "/arma3"])
 steamcmd.extend(["+login", os.environ["STEAM_USER"], os.environ["STEAM_PASSWORD"]])
 steamcmd.extend(["+app_update", "233780"])
+if (CACHE != 0):
+    steamcmd.extend(["+app_update", "233780"])
 if env_defined("STEAM_BRANCH"):
     steamcmd.extend(["-beta", os.environ["STEAM_BRANCH"]])
 if env_defined("STEAM_BRANCH_PASSWORD"):
@@ -75,10 +77,11 @@ subprocess.call(steamcmd)
 if (CACHE != 0):
     print("Attempting to sync files back to cache.")
     if (os.path.exists("/cache")):
-        subprocess.call("rsync -a","--exclude 'keys/'", "--exclude 'mods/'", "--exclude 'missions/'", "--exclude 'servermods/'", "--exclude '__pycache/'" "--exclude 'mpmissions/'", "--exclude 'configs/basic.cfg' --exclude 'configs/main.cfg'", ". /cache" )
+        subprocess.call("rsync -c -P --exclude 'keys' --exclude 'mods' --exclude 'missions' --exclude 'servermods' --exclude '__pycache__' --exclude 'mpmissions' --exclude 'configs/basic.cfg' --exclude 'configs/main.cfg' /arma3/ /cache/".split())
     else:
         print("Cache directory not found. Skipping.")
-    open("config/ready", "a")
+    f = open("/arma3/config/ready.txt", "w")
+    f.close
 # Mods
 
 mods = []
