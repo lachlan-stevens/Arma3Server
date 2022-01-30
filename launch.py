@@ -36,12 +36,13 @@ if (OP_MODE.lower() == "client" and CACHE != 0):
     while(True):
         print("Waiting for host to be ready...")
         time.sleep(30)
-        if (os.path.exists("config/ready")):
+        if (os.path.exists("/cache/ready")):
             break
 
 elif (OP_MODE.lower() == "standalone"):
-    if (os.path.exists("config/ready")):
-        os.remove("config/ready")
+    if (os.path.exists("/cache/ready")):
+        print("Removing readiness flag")
+        os.remove("/cache/ready")
 
 
 if (CACHE != 0):
@@ -74,14 +75,14 @@ subprocess.call(steamcmd)
 
 # CACHE
 
-if (CACHE != 0):
+if (CACHE != 0 and OP_MODE=="standalone"):
     print("Attempting to sync files back to cache.")
     if (os.path.exists("/cache")):
         subprocess.call("rsync -c -P --exclude 'keys' --exclude 'mods' --exclude 'missions' --exclude 'servermods' --exclude '__pycache__' --exclude 'mpmissions' --exclude 'configs/basic.cfg' --exclude 'configs/main.cfg' /arma3/ /cache/".split())
+        os.mkdir("/cache/ready")
     else:
         print("Cache directory not found. Skipping.")
-    f = open("/arma3/config/ready.txt", "w")
-    f.close
+        
 # Mods
 
 mods = []
