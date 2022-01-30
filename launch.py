@@ -2,6 +2,7 @@ import os
 import re
 import subprocess
 import ipaddress
+import time
 
 import local
 import workshop
@@ -29,12 +30,25 @@ try:
 except:
     print("Attempted to get service environment variable for IP HOST IP. Failed.")
 
+    print("Starting container in {} mode...".format(OP_MODE))
+
+if (OP_MODE.lower() = "client" and CACHE != 0):
+    while(True):
+        print("Waiting for host to be ready...")
+        sleep(30)
+        if (os.path.exists("config/ready")):
+            break
+
+elif (OP_MODE.lower() = "standalone"):
+    if (os.path.exists("config/ready")):
+        os.remove("config/ready")
+
+
 if (CACHE != 0):
     print("Attempting to get files from cache")
     if (os.path.exists("/cache")):
         subprocess.call("rsync -a", "/cache .")
 
-print("Starting container in {} mode...".format(OP_MODE))
 
 if not os.path.isdir(KEYS):
     if os.path.exists(KEYS):
@@ -64,6 +78,7 @@ if (CACHE != 0):
         subprocess.call("rsync -a","--exclude 'keys/'", "--exclude 'mods/'", "--exclude 'missions/'", "--exclude 'servermods/'", "--exclude '__pycache/'" "--exclude 'mpmissions/'", "--exclude 'configs/basic.cfg' --exclude 'configs/main.cfg'", ". /cache" )
     else:
         print("Cache directory not found. Skipping.")
+    open("config/ready", "a")
 # Mods
 
 mods = []
