@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 LABEL maintainer="Lachlan Stevens"
 LABEL org.opencontainers.image.source=https://github.com/lachlan-stevens
