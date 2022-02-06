@@ -86,12 +86,18 @@ To use a Creator DLC the `STEAM_BRANCH` must be set to `creatordlc`
 | ---- | ---- |
 | [CSLA Iron Curtain](https://store.steampowered.com/app/1294440/Arma_3_Creator_DLC_CSLA_Iron_Curtain/) | CSLA |
 | [Global Mobilization - Cold War Germany](https://store.steampowered.com/app/1042220/Arma_3_Creator_DLC_Global_Mobilization__Cold_War_Germany/) | GM |
-| [S.O.G. Prairie Fire](https://store.steampowered.com/app/1227700/Arma_3_Creator_DLC_SOG_Prairie_Fire) | vn |
+| [S.O.G. Prairie Fire](https://store.steampowered.com/app/1227700/Arma_3_Creator_DLC_SOG_Prairie_Fire) (see below) | vn |
 | [Western Sahara](https://store.steampowered.com/app/1681170/Arma_3_Creator_DLC_Western_Sahara/) | WS |
 
 ### Example
 
 `-e ARMA_CDLC="csla;gm;vn;ws"`
+
+### A note on S.O.G. Prairie Fire Headless Clients
+
+There is a bug in the S.O.G. Prairie Fire CDLC which causes headless clients to crash on launch. This appears to be caused by the way the main menu UI is created (the headless client has no screen resolution, which causes divide by zero errors. To get around this on my own servers I use the below Steam Workshop asset (I'm not providing an endorse and do not have any association with the asset or its creators).
+
+[S.O.G. Prairie Fire Vanilla Main Menu](https://steamcommunity.com/sharedfiles/filedetails/?id=2487302280)
 
 ## Loading mods
 
