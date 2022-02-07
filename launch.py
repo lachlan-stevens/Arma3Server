@@ -24,13 +24,13 @@ KEYS = "/arma3/keys"
 HEADLESS_IP = os.environ["HEADLESS_IP"]
 HOST_IP = os.environ["HOST_IP"]
 CACHE = os.environ["CACHE"]
-try:
-    HOST_IP = os.environ[HOST_IP]
-    print("Got service IP from env")
-except:
-    print("Attempted to get service environment variable for IP HOST IP. Failed.")
 
-    print("Starting container in {} mode...".format(OP_MODE))
+if (CACHE != 0):
+     if not os.path.exists("/cache/"):
+        print("ERROR: Caching option selected but cache directory not found! Cache volume must be attached at /cache")
+        system.exit(1)
+
+print("Starting container in {} mode...".format(OP_MODE))
 
 if (OP_MODE.lower() == "client" and CACHE != 0):
     while(True):
@@ -47,8 +47,7 @@ elif (OP_MODE.lower() == "standalone"):
 
 if (CACHE != 0):
     print("Attempting to get files from cache")
-    if (os.path.exists("/cache")):
-        subprocess.call("rsync -a -P --exclude 'keys' --exclude 'mods' --exclude 'missions' --exclude 'servermods' --exclude '__pycache__' --exclude 'mpmissions' --exclude 'configs/basic.cfg' --exclude 'configs/main.cfg' /cache/ /arma3/".split())
+    subprocess.call("rsync -a -P --exclude 'keys' --exclude 'mods' --exclude 'missions' --exclude 'servermods' --exclude '__pycache__' --exclude 'mpmissions' --exclude 'configs/basic.cfg' --exclude 'configs/main.cfg' /cache/ /arma3/".split())
 
 
 if not os.path.isdir(KEYS):
@@ -77,11 +76,8 @@ subprocess.call(steamcmd)
 
 if (CACHE != 0 and OP_MODE=="standalone"):
     print("Attempting to sync files back to cache.")
-    if (os.path.exists("/cache")):
-        subprocess.call("rsync -c -P --exclude 'keys' --exclude 'mods' --exclude 'missions' --exclude 'servermods' --exclude '__pycache__' --exclude 'mpmissions' --exclude 'configs/basic.cfg' --exclude 'configs/main.cfg' /arma3/ /cache/".split())
-        os.mkdir("/cache/ready")
-    else:
-        print("Cache directory not found. Skipping.")
+    subprocess.call("rsync -c -P --exclude 'keys' --exclude 'mods' --exclude 'missions' --exclude 'servermods' --exclude '__pycache__' --exclude 'mpmissions' --exclude 'configs/basic.cfg' --exclude 'configs/main.cfg' /arma3/ /cache/".split())
+    os.mkdir("/cache/ready")
         
 # Mods
 
@@ -211,8 +207,8 @@ elif OP_MODE.lower() == "client":
     try: 
         host_ip = str(ipaddress.ip_address(HOST_IP))
     except:
-        print("[ERROR]: Valid IPv4 Host IP is required for headless mode. Exiting.")
-        os.exit()
+        print("ERROR: Valid IPv4 Host IP is required for headless mode. Exiting.")
+        system.exit(1)
 
     print("Got host IP...")
 
