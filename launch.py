@@ -1,4 +1,5 @@
 import os
+import sys
 import re
 import subprocess
 import ipaddress
@@ -28,7 +29,7 @@ CACHE = os.environ["CACHE"]
 if (CACHE != 0):
      if not os.path.exists("/cache/"):
         print("ERROR: Caching option selected but cache directory not found! Cache volume must be attached at /cache")
-        system.exit(1)
+        sys.exit(1)
 
 print("Starting container in {} mode...".format(OP_MODE))
 
@@ -42,7 +43,7 @@ if (OP_MODE.lower() == "client" and CACHE != 0):
 elif (OP_MODE.lower() == "standalone"):
     if (os.path.exists("/cache/ready")):
         print("Removing readiness flag")
-        os.remove("/cache/ready")
+        os.rmdir("/cache/ready")
 
 
 if (CACHE != 0):
@@ -208,7 +209,7 @@ elif OP_MODE.lower() == "client":
         host_ip = str(ipaddress.ip_address(HOST_IP))
     except:
         print("ERROR: Valid IPv4 Host IP is required for headless mode. Exiting.")
-        system.exit(1)
+        sys.exit(1)
 
     print("Got host IP...")
 
